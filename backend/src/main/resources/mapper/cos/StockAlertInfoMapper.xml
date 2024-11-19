@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.cos.dao.StockAlertInfoMapper">
+
+    <!-- 分页获取库存预警信息 -->
+    <select id="selectStockAlertPage" resultType="java.util.LinkedHashMap">
+        select sai.id,
+        sai.commodity_id,
+        sai.remark as alertRemark,
+        sai.status,
+        sai.create_date,
+        sai.current_num,
+        sai.put_num,
+        ci.name as commodityName,
+        ci.model,
+        ci.code,
+        ci.purchase_price,
+        ci.unit,
+        ci.images,
+        ct.name as typeName
+        from stock_alert_info sai
+        left join commodity_info ci on
+        (ci.id = sai.commodity_id)
+        left join commodity_type ct on
+        (ct.id = ci.type_id)
+        where 1 = 1
+        <if test="stockAlertInfo.status != null and stockAlertInfo.status != ''">
+            AND sai.status = #{stockAlertInfo.status}
+        </if>
+        <if test="stockAlertInfo.name != null and stockAlertInfo.name != ''">
+            AND ci.name LIKE CONCAT('%',#{stockAlertInfo.name},'%')
+        </if>
+        <if test="stockAlertInfo.model != null and stockAlertInfo.model != ''">
+            AND ci.model LIKE CONCAT('%',#{stockAlertInfo.model},'%')
+        </if>
+        order by sai.create_date desc
+    </select>
+</mapper>

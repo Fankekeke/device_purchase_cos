@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.cos.dao.OrderOutInfoMapper">
+
+    <!-- 分页获取库房出库信息 -->
+    <select id="selectOrderOutPage" resultType="java.util.LinkedHashMap">
+        select
+        ooi.id,
+        ooi.code,
+        ooi.name,
+        ooi.put_user,
+        ooi.total_price,
+        ooi.remark,
+        ooi.user_id,
+        ooi.address_id,
+        ooi.create_date,
+        ooi.order_id,
+        ui.name as userName,
+        ui.images,
+        ai.address,
+        oi.code as orderCode
+        from
+        order_out_info ooi
+        left join user_info ui on
+        (ui.id = ooi.user_id)
+        left join address_info ai on
+        (ai.id = ooi.address_id)
+        left join order_info oi on
+        (oi.id = ooi.order_id)
+        where
+        1 = 1
+        <if test="orderOutInfo.code != null and orderOutInfo.code != ''">
+            AND ooi.code LIKE CONCAT('%',#{orderOutInfo.code},'%')
+        </if>
+        <if test="orderOutInfo.name != null and orderOutInfo.name != ''">
+            AND ooi.name LIKE CONCAT('%',#{orderOutInfo.name},'%')
+        </if>
+        <if test="orderOutInfo.userName != null and orderOutInfo.userName != ''">
+            AND ui.name LIKE CONCAT('%',#{orderOutInfo.userName},'%')
+        </if>
+        order by
+        ooi.create_date desc
+    </select>
+
+    <!-- 根据时间获取出库信息 -->
+    <select id="selectOrderOutListByDate" resultType="cc.mrbird.febs.cos.entity.OrderOutInfo">
+        select
+        ooi.id,
+        ooi.code,
+        ooi.name,
+        ooi.put_user,
+        ooi.total_price,
+        ooi.remark,
+        ooi.user_id,
+        ooi.address_id,
+        ooi.create_date,
+        ooi.order_id,
+        DATE_FORMAT( ooi.create_date, '%Y' ) as `year`,
+        DATE_FORMAT( ooi.create_date, '%m' ) as `month`,
+        DATE_FORMAT( ooi.create_date, '%d' ) as `day`
+        from
+        order_out_info ooi
+        where
+        1 = 1
+        <if test="year != null and year != ''">
+            and DATE_FORMAT( ooi.create_date, '%Y' ) = #{year}
+        </if>
+        <if test="month != null and month != ''">
+            and DATE_FORMAT( ooi.create_date, '%m' ) = #{month}
+        </if>
+        order by
+        ooi.create_date desc
+    </select>
+</mapper>

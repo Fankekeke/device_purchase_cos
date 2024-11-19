@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.cos.dao.CommodityRebateInfoMapper">
+
+    <!-- 分页获取商品信息 -->
+    <select id="selectRebatePage" resultType="java.util.LinkedHashMap">
+        select
+        cri.id,
+        cri.code,
+        cri.commodity_id,
+        cri.low_rate,
+        cri.normal_price,
+        cri.special_price,
+        cri.remark,
+        cri.create_date,
+        cri.low_restriction,
+        cri.special_restriction,
+        ci.name as commodityName,
+        ci.model,
+        ci.purchase_price,
+        ci.images,
+        ct.name as typeName
+        from
+        commodity_rebate_info cri
+        left join commodity_info ci on (ci.id = cri.commodity_id)
+        left join commodity_type ct on (ct.id = ci.type_id)
+        where 1 = 1
+        <if test="commodityRebateInfo.code != null and commodityRebateInfo.code != ''">
+            AND ci.code LIKE CONCAT('%',#{commodityRebateInfo.code},'%')
+        </if>
+        <if test="commodityRebateInfo.name != null and commodityRebateInfo.name != ''">
+            AND ci.name LIKE CONCAT('%',#{commodityRebateInfo.name},'%')
+        </if>
+        <if test="commodityRebateInfo.typeName != null and commodityRebateInfo.typeName != ''">
+            AND ct.name LIKE CONCAT('%',#{commodityRebateInfo.typeName},'%')
+        </if>
+        order by cri.create_date desc
+
+    </select>
+</mapper>

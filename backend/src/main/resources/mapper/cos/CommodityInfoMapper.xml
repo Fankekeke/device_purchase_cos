@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.cos.dao.CommodityInfoMapper">
+
+    <!-- 分页获取商品信息 -->
+    <select id="selectCommodityPage" resultType="java.util.LinkedHashMap">
+        select
+        ci.id,
+        ci.code,
+        ci.name,
+        ci.model,
+        ci.type_id,
+        ci.unit,
+        ci.purchase_price,
+        ci.sell_price,
+        ci.images,
+        ci.remark,
+        ci.create_date,
+        ct.name as typeName
+        from
+        commodity_info ci
+        left join commodity_type ct on (ct.id = ci.type_id)
+        where 1 = 1
+        <if test="commodityInfo.code != null and commodityInfo.code != ''">
+            AND ci.code LIKE CONCAT('%',#{commodityInfo.code},'%')
+        </if>
+        <if test="commodityInfo.name != null and commodityInfo.name != ''">
+            AND ci.name LIKE CONCAT('%',#{commodityInfo.name},'%')
+        </if>
+        <if test="commodityInfo.model != null and commodityInfo.model != ''">
+            AND ci.model LIKE CONCAT('%',#{commodityInfo.model},'%')
+        </if>
+        <if test="commodityInfo.typeName != null and commodityInfo.typeName != ''">
+            AND ct.name LIKE CONCAT('%',#{commodityInfo.typeName},'%')
+        </if>
+        order by ci.create_date desc
+
+    </select>
+</mapper>

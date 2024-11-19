@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.cos.dao.AlertConfigurationInfoMapper">
+
+    <!-- 分页获取报警配置 -->
+    <select id="selectAlertConfigurationPage" resultType="java.util.LinkedHashMap">
+        select
+        aci.id,
+        aci.type_id,
+        aci.alert_num,
+        aci.create_date,
+        aci.remark,
+        ct.code,
+        ct.name
+        from
+        alert_configuration_info aci
+        left join commodity_type ct on (ct.id = aci.type_id)
+        where
+        1 = 1
+        <if test="alertConfigurationInfo.code != null and alertConfigurationInfo.code != ''">
+            AND ct.code LIKE CONCAT('%',#{alertConfigurationInfo.code},'%')
+        </if>
+        <if test="alertConfigurationInfo.name != null and alertConfigurationInfo.name != ''">
+            AND ct.name LIKE CONCAT('%',#{alertConfigurationInfo.name},'%')
+        </if>
+        order by
+        aci.create_date desc
+    </select>
+</mapper>

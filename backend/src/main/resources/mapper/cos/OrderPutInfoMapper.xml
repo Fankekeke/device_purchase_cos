@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.cos.dao.OrderPutInfoMapper">
+
+    <!-- 分页获取库房入库信息 -->
+    <select id="selectOrderPutPage" resultType="java.util.LinkedHashMap">
+        select
+        id,
+        code,
+        name,
+        total_price,
+        put_user,
+        remark,
+        create_date
+        from
+        order_put_info
+        where 1 = 1
+        <if test="orderPutInfo.code != null and orderPutInfo.code != ''">
+            AND code LIKE CONCAT('%',#{orderPutInfo.code},'%')
+        </if>
+        <if test="orderPutInfo.name != null and orderPutInfo.name != ''">
+            AND name LIKE CONCAT('%',#{orderPutInfo.name},'%')
+        </if>
+        <if test="orderPutInfo.putUser != null and orderPutInfo.putUser != ''">
+            AND put_user LIKE CONCAT('%',#{orderPutInfo.putUser},'%')
+        </if>
+        order by create_date desc
+
+    </select>
+
+    <!-- 根据时间获取入库信息 -->
+    <select id="selectOrderPutListByDate" resultType="cc.mrbird.febs.cos.entity.OrderPutInfo">
+        select
+        id,
+        code,
+        name,
+        total_price,
+        put_user,
+        remark,
+        create_date,
+        DATE_FORMAT( create_date, '%Y' ) as `year`,
+        DATE_FORMAT( create_date, '%m' ) as `month`,
+        DATE_FORMAT( create_date, '%d' ) as `day`
+        from
+        order_put_info
+        where 1 = 1
+        <if test="year != null and year != ''">
+            and DATE_FORMAT( create_date, '%Y' ) = #{year}
+        </if>
+        <if test="month != null and month != ''">
+            and DATE_FORMAT( create_date, '%m' ) = #{month}
+        </if>
+        order by create_date desc
+    </select>
+</mapper>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.cos.dao.StoreRecordInfoMapper">
+
+    <!-- 分页获取库房记录信息  -->
+    <select id="selectStoreRecordPage" resultType="java.util.LinkedHashMap">
+        select
+        sri.id,
+        sri.commodity_code,
+        sri.num,
+        sri.`type`,
+        sri.order_number,
+        sri.price,
+        sri.total_price,
+        sri.create_date,
+        ci.code,
+        ci.name,
+        ci.purchase_price,
+        ci.model,
+        ci.unit,
+        ci.images,
+        ct.name as typeName
+        from
+        store_record_info sri
+        left join commodity_info ci on
+        (ci.code = sri.commodity_code)
+        left join commodity_type ct on
+        (ct.id = ci.type_id)
+        where
+        1 = 1
+        AND sri.`type` in (1, 2)
+        <if test="storeRecordInfo.name != null and storeRecordInfo.name != ''">
+            AND ci.name LIKE CONCAT('%',#{storeRecordInfo.name},'%')
+        </if>
+        <if test="storeRecordInfo.model != null and storeRecordInfo.model != ''">
+            AND ci.model LIKE CONCAT('%',#{storeRecordInfo.model},'%')
+        </if>
+        <if test="storeRecordInfo.type != null and storeRecordInfo.type != ''">
+            AND sri.type = #{storeRecordInfo.type}
+        </if>
+        order by
+        sri.create_date desc
+    </select>
+
+    <!-- 分页获取库房库存 -->
+    <select id="selectStorePage" resultType="java.util.LinkedHashMap">
+        select
+        sri.id,
+        sri.commodity_code,
+        sri.num,
+        sri.`type`,
+        sri.order_number,
+        sri.price,
+        sri.total_price,
+        sri.create_date,
+        ci.code,
+        ci.name,
+        ci.purchase_price,
+        ci.model,
+        ci.unit,
+        ci.images,
+        ct.name as typeName
+        from
+        store_record_info sri
+        left join commodity_info ci on
+        (ci.code = sri.commodity_code)
+        left join commodity_type ct on
+        (ct.id = ci.type_id)
+        where
+        1 = 1
+        AND sri.`type` = 0
+        <if test="storeRecordInfo.name != null and storeRecordInfo.name != ''">
+            AND ci.name LIKE CONCAT('%',#{storeRecordInfo.name},'%')
+        </if>
+        <if test="storeRecordInfo.model != null and storeRecordInfo.model != ''">
+            AND ci.model LIKE CONCAT('%',#{storeRecordInfo.model},'%')
+        </if>
+        order by
+        sri.create_date desc
+    </select>
+
+    <!-- 根据年月获取商品出入库信息 -->
+    <select id="selectRecordBySlot" resultType="cc.mrbird.febs.cos.entity.StoreRecordInfo">
+        select
+        sri.id,
+        sri.commodity_code,
+        sri.num,
+        sri.`type`,
+        sri.order_number,
+        sri.price,
+        sri.total_price,
+        sri.create_date,
+        ct.id as typeId,
+        ct.name as typeName
+        from
+        store_record_info sri
+        left join commodity_info ci on
+        (ci.code = sri.commodity_code)
+        left join commodity_type ct on
+        (ct.id = ci.type_id)
+        where
+        1 = 1
+        <if test="type != null and type != ''">
+            AND sri.type = #{type}
+        </if>
+        <if test="year != null and year != ''">
+            AND DATE_FORMAT( sri.create_date, '%Y' ) = #{year}
+        </if>
+        <if test="month != null and month != ''">
+            AND DATE_FORMAT( sri.create_date, '%m' ) = #{month}
+        </if>
+        order by
+        sri.create_date desc
+    </select>
+</mapper>
