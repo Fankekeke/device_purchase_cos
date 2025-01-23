@@ -61,6 +61,7 @@ fank
 | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112374782.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112214986.png) |
 | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112367271.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112189532.png) |
 | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112359210.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112179138.png) |
+| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/work/936e9baf53eb9a217af4f89c616dc19.png) |
 
 
 #### 演示视频
