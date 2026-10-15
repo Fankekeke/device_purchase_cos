@@ -1,14 +1,17 @@
-### 基于SpringBoot + Vue的智能电子设备采购系统.
+![](https://img.shields.io/badge/License-MIT-blue.svg)
 
-智能设备采购平台、智能化采购平台、企业电子设备采购系统
+![](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)
 
-#### 管理员功能模块介绍：
-> 收货地址：管理企业用户的默认或常用收货地址信息。预警配置：设置库存、订单或设备异常的自动提醒规则。公告管理：发布系统通知、采购政策或重要事项公告。商品管理：维护智能电子设备的商品信息与上下架状态。商品折扣：配置促销活动、批量采购优惠或限时折扣策略。商品类型：分类管理设备品类，如电脑、网络、安防等。配送物流：跟踪和协调订单发货、承运商及物流进度。订单管理：处理、审核并监控所有企业采购订单全流程。库房出库：记录设备出库时间、数量、领用单位及操作人。库房入库：登记采购到货设备的入库明细与验收信息。库存预警：自动提示库存低于安全阈值的设备品类。库房管理：维护多个库房信息，包括位置、容量与负责人。库房记录：汇总出入库、调拨、盘点等全量库房操作日志。用户管理：管理企业账号、联系人及权限分配。数据统计：分析采购频次、热门商品、供应商表现等数据。订单年统计：生成年度采购金额、订单量及趋势分析报表。订单月统计：按月汇总订单数量、支出及设备类别分布。
+![](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-#### 用户（企业）功能模块介绍：
-> 个人信息：维护企业联系人、部门、联系方式等基本资料。收货地址：设置和管理多个收货地址用于不同订单配送。订单物流：实时查看已下单设备的发货与物流跟踪信息。订单管理：提交、取消或查询本企业所有采购订单状态。商品选购：浏览、筛选智能电子设备并加入采购清单。邮件通知：接收订单确认、发货提醒、审批结果等邮件。
+# 基于 SpringBoot + Vue 的智能电子设备采购系统 (Smart Device Procurement System)
+
+企业采购 · 智能库存预警 · 库房管理 · 物流跟踪 · 折扣管理 · 数据统计 · 邮件通知
+
+本项目是一套面向企业采购场景的智能电子设备采购系统，覆盖“商品管理、企业选购、在线支付、订单管理、库房出入库、库存预警、配送物流、公告发布、邮件通知、数据统计”等核心业务。系统分为管理员与企业用户两类角色：管理员负责平台商品与折扣配置、库房管理、库存预警、订单处理、物流配送、公告发布与数据统计；企业用户可浏览选购智能电子设备、管理收货地址、下单支付、跟踪订单物流、查看订单状态并接收邮件通知。
 
 #### 安装环境
+️**注意**：请确保您的开发环境已安装以下依赖。
 
 JAVA 环境 
 
@@ -16,30 +19,112 @@ Node.js环境 [https://nodejs.org/en/] 选择14.17
 
 Yarn 打开cmd， 输入npm install -g yarn !!!必须安装完毕nodejs
 
-Mysql 数据库 [https://blog.csdn.net/qq_40303031/article/details/88935262] 一定要把账户和密码记住
+Mysql 数据库 一定要把账户和密码记住
 
 redis
 
-Idea 编译器 [https://blog.csdn.net/weixin_44505194/article/details/104452880]
+Idea 编译器
 
-WebStorm OR VScode 编译器 [https://www.jianshu.com/p/d63b5bae9dff]
+WebStorm OR VScode 编译器
 
 #### 采用技术及功能
 
 后端：SpringBoot、MybatisPlus、MySQL、Redis、
 前端：Vue、Apex、Antd、Axios
 
-平台前端：vue(框架) + vuex(全局缓存) + rue-router(路由) + axios(请求插件) + apex(图表)  + antd-ui(ui组件)
+平台前端：vue(框架) + vuex(全局缓存) + rue-router(路由) + axios(请求插件) + apex(图表)  + antd-ui(ui组件) + 百度地图 API
 
 平台后台：springboot(框架) + redis(缓存中间件) + shiro(权限中间件) + mybatisplus(orm) + restful风格接口 + mysql(数据库)
 
 开发环境：windows10 or windows7 ， vscode or webstorm ， idea + lambok
 
-##### 管理员：
-收货地址、预警配置、公告管理、商品管理、商品折扣、商品类型、配送物流、订单管理、库房出库、库房入库、库存预警、库房管理、库房记录、用户管理、数据统计、订单年统计、订单月统计
+---
 
-##### 用户（企业）：
-个人信息、收货地址、订单物流、订单管理、商品选购、邮件通知
+## 核心特性
+
+- **商品折扣配置**：管理员可为商品设置折扣活动，支持限时折扣、批量折扣与会员折扣，提升采购转化率。
+- **企业商品选购**：企业用户可按商品类型、品牌、价格区间浏览智能电子设备，支持关键词搜索与批量选购。
+- **支付宝在线支付**：企业用户下单后可通过支付宝完成在线支付，保障交易安全与支付便捷。
+- **订单全流程管理**：支持待支付、已支付、待发货、已发货、已完成、已取消等订单状态流转，管理员与企业用户均可跟踪订单进度。
+- **订单物流跟踪**：企业用户可查看订单配送物流信息，实时掌握设备配送状态。
+- **库房出入库管理**：管理员可管理库房入库与出库记录，支持采购入库、销售出库、库存调拨与异常出入库处理。
+- **库存预警机制**：系统根据库存阈值自动触发库存预警，管理员可配置预警规则并及时补货，避免缺货影响采购。
+- **库房管理**：管理员可管理多个库房信息，包括库房名称、位置、容量、负责人与库存分布。
+- **库房记录查询**：管理员可查看库房出入库历史记录，支持按时间、商品、库房筛选记录。
+- **邮件通知服务**：系统通过邮件向企业用户发送订单状态变更、发货通知、库存预警与平台公告等信息。
+- **数据统计看板**：管理员可查看平台采购数据，包括订单数量、采购金额、热门商品、库存情况与销售趋势。
+- **订单年统计与月统计**：系统支持按年度与月度统计订单数据，分析采购趋势与季节性变化。
+---
+
+## 适用场景
+
+- 企业智能设备采购平台
+- 智能硬件B2B采购系统
+- 电子设备供应链管理系统
+- 企业物资采购商城
+- 智能仓储与采购一体化平台
+- 校园电子设备采购系统
+- 政府智能设备采购平台
+- 企业IT设备采购管理系统
+---
+
+## 功能模块概览
+
+### 管理员端
+
+- **用户管理**：管理企业用户账号、联系方式、账号状态、企业认证信息与历史采购记录。
+- **商品管理**：维护智能电子设备商品信息，包括设备名称、型号、规格、价格、库存、上架与下架管理。
+- **商品类型**：维护智能设备分类体系，如智能手机、平板电脑、智能手表、智能家居设备、办公设备等。
+- **商品折扣**：配置商品折扣活动，设置折扣力度、活动时间、适用商品与折扣规则。
+- **订单管理**：查看平台全部采购订单，跟踪订单状态，处理异常订单与售后问题。
+- **库房管理**：管理库房基本信息，包括库房名称、位置、容量、负责人与库房状态。
+- **库房入库**：处理商品入库操作，记录入库商品、数量、入库时间、入库库房与操作人员。
+- **库房出库**：处理订单出库操作，关联订单信息，记录出库商品、数量、出库时间与操作人员。
+- **库房记录**：查看库房出入库历史记录，支持按时间、商品、库房筛选与导出记录。
+- **库存预警**：查看库存预警信息，配置库存阈值与预警规则，及时处理低库存商品。
+- **预警配置**：设置库存预警阈值、预警通知方式、预警商品范围与预警触发条件。
+- **配送物流**：管理物流配送信息，录入物流单号、物流公司、配送状态与配送轨迹。
+- **收货地址**：查看企业用户收货地址数据，支持异常地址处理与地址规范管理。
+- **公告管理**：发布平台公告、采购政策、新品上架、折扣活动与系统维护通知。
+- **数据统计**：统计平台用户数、商品数、订单数、采购金额、库存情况与用户活跃度。
+- **订单年统计**：按年度统计订单数量、采购金额、热门商品与采购趋势。
+- **订单月统计**：按月度统计订单数据，分析月度采购变化与季节性采购规律。
+
+### 企业用户端
+
+- **个人信息**：维护企业昵称、联系方式、企业认证信息、发票抬头与个人简介。
+- **收货地址**：新增、编辑、删除收货地址，支持设置默认收货地址。
+- **商品选购**：浏览智能电子设备商品，按分类、品牌、价格筛选商品，支持关键词搜索与批量选购。
+- **订单管理**：查看个人采购订单，跟踪待支付、已支付、待发货、已发货、已完成等状态。
+- **订单物流**：查看订单配送物流信息，实时掌握设备配送状态与预计送达时间。
+- **支付宝在线支付**：对采购订单进行支付宝支付，查看支付状态与交易明细。
+- **邮件通知**：接收订单状态变更、发货通知、库存补货提醒与平台公告邮件通知。
+
+
+---
+
+## 项目结构
+
+```text
+pharmacy-dispensing-system/
+├── backend/            # 后端 API 服务
+│   ├── src/
+│   │   ├── controllers/  # 控制器
+│   │   ├── models/       # 数据模型
+│   │   ├── routes/       # 路由
+│   │   └── services/     # 业务逻辑
+│   └── package.json
+├── frontend/           # 前端 Web 应用
+│   ├── src/
+│   │   ├── views/      # 页面视图
+│   │   ├── components/ # 公共组件
+│   │   └── store/      # 状态管理
+│   └── package.json
+├── docs/               # 项目文档与 API 接口说明
+├── LICENSE
+└── README.md
+```
+---
 
 
 #### 前台启动方式
@@ -49,28 +134,26 @@ WebStorm OR VScode 编译器 [https://www.jianshu.com/p/d63b5bae9dff]
 #### 默认后台账户密码
 [管理员]
 admin
-1234qwer
+123456
 
 [用户]
 fank
-1234qwer
-#### 项目截图
+123456
 
+#### 项目截图
 |  |  |
 |---------------------|---------------------|
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112168232.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112353127.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112151518.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112342520.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112143292.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112330104.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112105797.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112304603.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112454318.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112277711.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112437646.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112264617.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112405993.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112250564.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112395506.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112224493.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112374782.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112214986.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112367271.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112189532.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112359210.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/1732112179138.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/work/936e9baf53eb9a217af4f89c616dc19.png) |
-
+| ![](./assets/image%20(1).png) | ![](./assets/image%20(2).png) |
+| ![](./assets/image%20(3).png) | ![](./assets/image%20(4).png) |
+| ![](./assets/image%20(5).png) | ![](./assets/image%20(6).png) |
+| ![](./assets/image%20(7).png) | ![](./assets/image%20(8).png) |
+| ![](./assets/image%20(9).png) | ![](./assets/image%20(10).png) |
+| ![](./assets/image%20(11).png) | ![](./assets/image%20(12).png) |
+| ![](./assets/image%20(13).png) | ![](./assets/image%20(14).png) |
+| ![](./assets/image%20(15).png) | ![](./assets/image%20(16).png) |
+| ![](./assets/image%20(17).png) | ![](./assets/image%20(18).png) |
+| ![](./assets/image%20(19).png) | ![](./assets/image%20(20).png) |
+| ![](./assets/image%20(21).png) | ![](./assets/image%20(22).png) |
 
 #### 演示视频
 
@@ -88,7 +171,10 @@ WeChat: `Storm_Berserker`
 
 > 项目部署调试不好包退！功能逻辑没讲明白包退！
 
+<div align=center><img align="center" src="./assets/product_word.png" alt="fankekeke" /></div>
+
 #### 其它资源
+[2026年-答辩顺利通过-客户评价🀄](https://berserker287.github.io/2026/06/29/2026%E5%B9%B4%E7%AD%94%E8%BE%A9%E9%A1%BA%E5%88%A9%E9%80%9A%E8%BF%87/)
 
 [2025年-答辩顺利通过-客户评价🍜](https://berserker287.github.io/2025/06/18/2025%E5%B9%B4%E7%AD%94%E8%BE%A9%E9%A1%BA%E5%88%A9%E9%80%9A%E8%BF%87/)
 
@@ -112,4 +198,8 @@ WeChat: `Storm_Berserker`
 
 More info: [悲伤的橘子树](https://berserker287.github.io/)
 
-<p><img align="center" src="https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/%E5%90%88%E4%BD%9C%E7%89%A9%E6%96%99%E6%A0%B7%E5%BC%8F%20(3).png" alt="fankekeke" /></p>
+<div align="center"><img align="center" src="./assets/chat_qr_code.png" alt="fankekeke" width=250 /></div>
+
+<p><img align="center" src="./assets/wechat_group.png" alt="fankekeke" /></p>
+
+**感谢查看**
